@@ -4,9 +4,10 @@ option java_multiple_files = true;
 option java_package = "com.studentDemo.campusStore";
 option java_outer_classname = "campusStoreProto";
 
-service campusStoreService {
+service CampusStoreService {
     rpc getProductById (getProductRequest) returns (getProductResponse);
     rpc setProduct(setProductRequest) returns (setProductResponse);
+    rpc getProducts(getProductsRequest) returns (getProductsResponse);
 }
 
 message getProductRequest {
@@ -22,7 +23,7 @@ message setProductResponse {
     int64 id = 1;
 }
 message ProductMessage {
-    int64 id = 1;// This field should not be set by clients.
+    int64 id = 1;// This field should not be set by clients if you want to add a new product.If you want to modify a product, you should set this field.
     string name = 2;
     double price = 3;
     string imageUrl = 4;
@@ -35,4 +36,13 @@ message CommentMessage {
     int64 id = 1;
     string content = 2;
     int64 userId = 3;
+}
+
+message getProductsRequest {
+    string category = 1;
+    int32 page = 2;
+}
+
+message getProductsResponse {
+    repeated ProductMessage products = 1;
 }
