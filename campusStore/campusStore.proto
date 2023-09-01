@@ -1,4 +1,3 @@
-
 syntax = "proto3";
 
 option java_multiple_files = true;
@@ -60,6 +59,7 @@ message makeCommentRequest {
 message makeCommentResponse {
     bool success = 1;
 }
+
 
 
 message buyProductsRequest {
