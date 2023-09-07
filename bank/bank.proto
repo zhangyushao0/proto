@@ -36,11 +36,11 @@ message CancelTransferResponse {
 
 message TransactionMessage {
     int64 transactionId = 1;
-    string transactionType = 2;
+    string transactionType = 2;//正常状态有两个属性，“TransferFrom”和“TransferTo”，若此交易撤销取属性为“CancelTransferFromAt”+撤销时间或“CancelTransferToAt”+撤销时间
     int64 counterUserId = 3;
     double amount = 4;
-    int64 timestamp = 5;
-    string description = 6;
+    string time = 5;
+    string description = 6;//若为购买商品的交易，此属性为“buy id”+商品id
     string accountNumber = 7;
 }
 
@@ -53,7 +53,7 @@ message GetTransactionsByIdResponse {
 }
 
 message GetAllTransactionsRequest {
-    int32 page=1;
+    int32 page=1;//页数从1开始,一页10条记录
 }
 
 message GetAllTransactionsResponse {

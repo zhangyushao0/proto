@@ -4,6 +4,8 @@ option java_multiple_files = true;
 option java_package = "com.studentDemo.campusStore";
 option java_outer_classname = "campusStoreProto";
 
+
+//商店也是一个用户，用户id为1，所以所有与商店的交易，对手方都为id为1的用户
 service CampusStoreService {
     rpc getProductById (getProductRequest) returns (getProductResponse);
     rpc setProduct(setProductRequest) returns (setProductResponse);
@@ -28,10 +30,10 @@ message setProductResponse {
     bool success = 2;
 }
 message ProductMessage {
-    int64 id = 1;// This field should not be set by clients if you want to add a new product.If you want to modify a product, you should set this field.
+    int64 id = 1;// 这个字段在新建商品时应当为空，即不填写；在修改原有商品时应当填写为想修改的id
     string name = 2;
     double price = 3;
-    string imageUrl = 4;
+    string imageUrl = 4;//这个为图片对应的连接，可以在网上找一些图床把图片上传上去，然后把图片的链接填写在这里，或者直接找例如淘宝的商品的图片链接
     string description = 5;
     string category = 6;
     repeated CommentMessage comments = 7;
@@ -44,8 +46,8 @@ message CommentMessage {
 }
 
 message getProductsRequest {
-    string category = 1;
-    int32 page = 2;
+    string category = 1;//如果填写为“all”，则返回所有商品
+    int32 page = 2;//查询页数，从1开始，每页10个商品
 }
 
 message getProductsResponse {
@@ -62,11 +64,10 @@ message makeCommentResponse {
     bool success = 1;
 }
 
-
-
 message buyProductsRequest {
     repeated int64 productId = 1;
     int64 userId = 2;
+    string password = 3;
 }
 
 message buyProductsResponse {
@@ -74,7 +75,7 @@ message buyProductsResponse {
 }
 
 message refundProductRequest {
-    int64 productId = 1;
+    int64 transactionId = 1;
     int64 userId = 2;
 }
 
