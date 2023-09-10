@@ -42,6 +42,7 @@ message TransactionMessage {
     string time = 5;
     string description = 6;//若为购买商品的交易，此属性为“buy id”+商品id
     string accountNumber = 7;
+    double balance = 8;
 }
 
 message GetTransactionsByIdRequest {
